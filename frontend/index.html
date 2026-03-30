@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StudyAI — Smart Notes & Quiz Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Epilogue:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     :root {
       --bg: #f0f0f7;
-      --glass: rgba(255,255,255,0.65);
-      --glass2: rgba(255,255,255,0.85);
-      --border: rgba(255,255,255,0.9);
-      --border2: rgba(200,200,230,0.4);
-      --shadow: 0 8px 32px rgba(80,60,180,0.10);
-      --shadow2: 0 2px 12px rgba(80,60,180,0.07);
+      --glass: rgba(255, 255, 255, 0.65);
+      --glass2: rgba(255, 255, 255, 0.85);
+      --border: rgba(255, 255, 255, 0.9);
+      --border2: rgba(200, 200, 230, 0.4);
+      --shadow: 0 8px 32px rgba(80, 60, 180, 0.10);
+      --shadow2: 0 2px 12px rgba(80, 60, 180, 0.07);
       --accent: #6c47ff;
       --accent2: #ff5c87;
       --accent3: #00c4a0;
@@ -26,7 +29,11 @@
       --radius2: 14px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background: var(--bg);
@@ -47,14 +54,46 @@
       z-index: 0;
       animation: drift 18s ease-in-out infinite alternate;
     }
-    .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, #c4b5fd, #8b5cf6); top: -120px; left: -100px; animation-delay: 0s; }
-    .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, #fda4af, #fb7185); top: 30%; right: -100px; animation-delay: -6s; }
-    .orb3 { width: 350px; height: 350px; background: radial-gradient(circle, #6ee7b7, #34d399); bottom: -80px; left: 30%; animation-delay: -12s; }
+
+    .orb1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #c4b5fd, #8b5cf6);
+      top: -120px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .orb2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #fda4af, #fb7185);
+      top: 30%;
+      right: -100px;
+      animation-delay: -6s;
+    }
+
+    .orb3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #6ee7b7, #34d399);
+      bottom: -80px;
+      left: 30%;
+      animation-delay: -12s;
+    }
 
     @keyframes drift {
-      0%   { transform: translate(0,0) scale(1); }
-      50%  { transform: translate(30px,-20px) scale(1.05); }
-      100% { transform: translate(-20px,30px) scale(0.97); }
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(30px, -20px) scale(1.05);
+      }
+
+      100% {
+        transform: translate(-20px, 30px) scale(0.97);
+      }
     }
 
     .wrapper {
@@ -69,12 +108,19 @@
     header {
       padding: 2.8rem 0 2rem;
       text-align: center;
-      animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) both;
+      animation: slideDown 0.6s cubic-bezier(.22, 1, .36, 1) both;
     }
 
     @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .logo-badge {
@@ -91,12 +137,15 @@
     }
 
     .logo-icon {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 13px;
-      box-shadow: 0 2px 8px rgba(108,71,255,0.4);
+      box-shadow: 0 2px 8px rgba(108, 71, 255, 0.4);
     }
 
     .logo-badge span {
@@ -138,16 +187,28 @@
       box-shadow: var(--shadow);
       padding: 1.8rem;
       margin-bottom: 1.2rem;
-      animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) both;
+      animation: fadeUp 0.5s cubic-bezier(.22, 1, .36, 1) both;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .card:nth-child(2) { animation-delay: 0.08s; }
-    .card:nth-child(3) { animation-delay: 0.14s; }
+    .card:nth-child(2) {
+      animation-delay: 0.08s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.14s;
+    }
 
     .section-label {
       font-family: 'Syne', sans-serif;
@@ -162,12 +223,17 @@
       gap: 0.6rem;
     }
 
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border2);
+    }
 
     textarea {
       width: 100%;
       min-height: 160px;
-      background: rgba(255,255,255,0.6);
+      background: rgba(255, 255, 255, 0.6);
       border: 1.5px solid var(--border2);
       border-radius: var(--radius2);
       color: var(--text);
@@ -182,10 +248,12 @@
 
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(108,71,255,0.12);
+      box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.12);
     }
 
-    textarea::placeholder { color: var(--muted); }
+    textarea::placeholder {
+      color: var(--muted);
+    }
 
     .divider-or {
       text-align: center;
@@ -196,7 +264,8 @@
       position: relative;
     }
 
-    .divider-or::before, .divider-or::after {
+    .divider-or::before,
+    .divider-or::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -205,43 +274,61 @@
       background: var(--border2);
     }
 
-    .divider-or::before { left: 0; }
-    .divider-or::after { right: 0; }
+    .divider-or::before {
+      left: 0;
+    }
+
+    .divider-or::after {
+      right: 0;
+    }
 
     .upload-zone {
-      border: 2px dashed rgba(108,71,255,0.25);
+      border: 2px dashed rgba(108, 71, 255, 0.25);
       border-radius: var(--radius2);
       padding: 1.4rem;
       text-align: center;
       cursor: pointer;
       transition: all 0.2s;
-      background: rgba(108,71,255,0.03);
+      background: rgba(108, 71, 255, 0.03);
     }
 
-    .upload-zone:hover, .upload-zone.drag-over {
+    .upload-zone:hover,
+    .upload-zone.drag-over {
       border-color: var(--accent);
-      background: rgba(108,71,255,0.07);
+      background: rgba(108, 71, 255, 0.07);
       transform: translateY(-1px);
     }
 
     .upload-icon {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, rgba(108,71,255,0.15), rgba(255,92,135,0.1));
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, rgba(108, 71, 255, 0.15), rgba(255, 92, 135, 0.1));
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       margin: 0 auto 0.6rem;
     }
 
-    .upload-zone p { color: var(--muted); font-size: 0.84rem; }
-    .upload-zone p strong { color: var(--accent); }
-    #fileInput { display: none; }
+    .upload-zone p {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .upload-zone p strong {
+      color: var(--accent);
+    }
+
+    #fileInput {
+      display: none;
+    }
 
     .file-pill {
       display: none;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(108,71,255,0.1);
+      background: rgba(108, 71, 255, 0.1);
       border-radius: 20px;
       padding: 0.3rem 0.8rem;
       font-size: 0.78rem;
@@ -251,7 +338,9 @@
       margin: 0.7rem auto 0;
     }
 
-    .file-pill.show { display: flex; }
+    .file-pill.show {
+      display: flex;
+    }
 
     /* CONTROLS */
     .controls {
@@ -268,7 +357,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow2);
       padding: 1.3rem 1.5rem;
-      animation: fadeUp 0.5s cubic-bezier(.22,1,.36,1) 0.2s both;
+      animation: fadeUp 0.5s cubic-bezier(.22, 1, .36, 1) 0.2s both;
     }
 
     .control-card label {
@@ -282,29 +371,36 @@
       margin-bottom: 0.9rem;
     }
 
-    .diff-options { display: flex; gap: 0.4rem; }
+    .diff-options {
+      display: flex;
+      gap: 0.4rem;
+    }
 
     .diff-btn {
       flex: 1;
       padding: 0.5rem 0.4rem;
       border-radius: 10px;
       border: 1.5px solid var(--border2);
-      background: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.5);
       color: var(--muted);
       font-family: 'Syne', sans-serif;
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(.22,1,.36,1);
+      transition: all 0.18s cubic-bezier(.22, 1, .36, 1);
     }
 
-    .diff-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .diff-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
 
     .diff-btn.active {
       background: linear-gradient(135deg, var(--accent), #9b7bff);
       border-color: transparent;
       color: white;
-      box-shadow: 0 4px 14px rgba(108,71,255,0.35);
+      box-shadow: 0 4px 14px rgba(108, 71, 255, 0.35);
       transform: translateY(-1px);
     }
 
@@ -332,23 +428,26 @@
       -webkit-appearance: none;
       height: 4px;
       border-radius: 2px;
-      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct,28.5%), rgba(200,200,230,0.4) var(--pct,28.5%));
+      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 28.5%), rgba(200, 200, 230, 0.4) var(--pct, 28.5%));
       outline: none;
       cursor: pointer;
     }
 
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 20px; height: 20px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
       background: white;
       border: 2.5px solid var(--accent);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(108,71,255,0.35);
+      box-shadow: 0 2px 8px rgba(108, 71, 255, 0.35);
       transition: transform 0.15s;
     }
 
-    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
 
     /* GENERATE BUTTON */
     .generate-btn {
@@ -366,39 +465,66 @@
       cursor: pointer;
       letter-spacing: 0.03em;
       transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-      box-shadow: 0 6px 24px rgba(108,71,255,0.4);
+      box-shadow: 0 6px 24px rgba(108, 71, 255, 0.4);
       position: relative;
       overflow: hidden;
       margin-bottom: 1.2rem;
     }
 
     @keyframes gradShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .generate-btn::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent);
       opacity: 0;
       transition: opacity 0.2s;
     }
 
-    .generate-btn:hover::before { opacity: 1; }
-    .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(108,71,255,0.5); }
-    .generate-btn:active { transform: translateY(0); }
-    .generate-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+    .generate-btn:hover::before {
+      opacity: 1;
+    }
 
-    .btn-inner { display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
+    .generate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(108, 71, 255, 0.5);
+    }
+
+    .generate-btn:active {
+      transform: translateY(0);
+    }
+
+    .generate-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
 
     /* ERROR */
     .error-box {
       display: none;
-      background: rgba(255,92,135,0.1);
-      border: 1px solid rgba(255,92,135,0.3);
+      background: rgba(255, 92, 135, 0.1);
+      border: 1px solid rgba(255, 92, 135, 0.3);
       border-radius: var(--radius2);
       padding: 0.9rem 1.2rem;
       color: var(--accent2);
@@ -406,35 +532,81 @@
       margin-bottom: 1.2rem;
     }
 
-    .error-box.active { display: block; animation: fadeUp 0.3s ease both; }
+    .error-box.active {
+      display: block;
+      animation: fadeUp 0.3s ease both;
+    }
 
     /* LOADER */
-    .loader { display: none; text-align: center; padding: 3rem 1rem; }
-    .loader.active { display: block; animation: fadeUp 0.3s ease both; }
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
 
-    .loader-dots { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .loader.active {
+      display: block;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .loader-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
 
     .loader-dots span {
-      width: 10px; height: 10px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--accent);
       animation: bounce 1.2s ease-in-out infinite;
     }
 
-    .loader-dots span:nth-child(2) { background: #9b7bff; animation-delay: 0.2s; }
-    .loader-dots span:nth-child(3) { background: var(--accent2); animation-delay: 0.4s; }
-
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); opacity: 0.5; }
-      50% { transform: translateY(-12px); opacity: 1; }
+    .loader-dots span:nth-child(2) {
+      background: #9b7bff;
+      animation-delay: 0.2s;
     }
 
-    .loader p { color: var(--muted); font-size: 0.9rem; }
-    .loader p em { color: var(--accent); font-style: normal; font-weight: 500; }
+    .loader-dots span:nth-child(3) {
+      background: var(--accent2);
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translateY(-12px);
+        opacity: 1;
+      }
+    }
+
+    .loader p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .loader p em {
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 500;
+    }
 
     /* RESULTS */
-    #results { display: none; }
-    #results.active { display: block; }
+    #results {
+      display: none;
+    }
+
+    #results.active {
+      display: block;
+    }
 
     .results-header {
       display: flex;
@@ -463,7 +635,7 @@
       gap: 0.5rem;
       padding: 0.6rem 1.2rem;
       background: var(--glass2);
-      border: 1.5px solid rgba(108,71,255,0.3);
+      border: 1.5px solid rgba(108, 71, 255, 0.3);
       border-radius: 12px;
       color: var(--accent);
       font-family: 'Syne', sans-serif;
@@ -479,7 +651,7 @@
       color: white;
       border-color: transparent;
       transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(108,71,255,0.35);
+      box-shadow: 0 4px 14px rgba(108, 71, 255, 0.35);
     }
 
     /* TABS */
@@ -507,15 +679,28 @@
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(.22,1,.36,1);
+      transition: all 0.2s cubic-bezier(.22, 1, .36, 1);
       letter-spacing: 0.03em;
     }
 
-    .tab-btn:hover { color: var(--accent); }
-    .tab-btn.active { background: white; color: var(--accent); box-shadow: 0 2px 10px rgba(108,71,255,0.15); }
+    .tab-btn:hover {
+      color: var(--accent);
+    }
 
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fadeUp 0.3s ease both; }
+    .tab-btn.active {
+      background: white;
+      color: var(--accent);
+      box-shadow: 0 2px 10px rgba(108, 71, 255, 0.15);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fadeUp 0.3s ease both;
+    }
 
     /* SUMMARY */
     .topic-card {
@@ -531,9 +716,18 @@
       border-left: 3px solid var(--accent);
     }
 
-    .topic-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .topic-card:nth-child(2n) { border-left-color: var(--accent2); }
-    .topic-card:nth-child(3n) { border-left-color: var(--accent3); }
+    .topic-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .topic-card:nth-child(2n) {
+      border-left-color: var(--accent2);
+    }
+
+    .topic-card:nth-child(3n) {
+      border-left-color: var(--accent3);
+    }
 
     .topic-title {
       font-family: 'Syne', sans-serif;
@@ -543,7 +737,9 @@
       color: var(--text);
     }
 
-    .topic-points { list-style: none; }
+    .topic-points {
+      list-style: none;
+    }
 
     .topic-points li {
       padding: 0.3rem 0 0.3rem 1.3rem;
@@ -551,16 +747,20 @@
       font-size: 0.87rem;
       line-height: 1.65;
       color: #4a4a6a;
-      border-bottom: 1px solid rgba(200,200,230,0.25);
+      border-bottom: 1px solid rgba(200, 200, 230, 0.25);
     }
 
-    .topic-points li:last-child { border-bottom: none; }
+    .topic-points li:last-child {
+      border-bottom: none;
+    }
 
     .topic-points li::before {
       content: '';
       position: absolute;
-      left: 0; top: 0.65rem;
-      width: 6px; height: 6px;
+      left: 0;
+      top: 0.65rem;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
     }
@@ -575,8 +775,9 @@
     }
 
     .progress-bar {
-      flex: 1; height: 5px;
-      background: rgba(200,200,230,0.4);
+      flex: 1;
+      height: 5px;
+      background: rgba(200, 200, 230, 0.4);
       border-radius: 3px;
       overflow: hidden;
     }
@@ -585,7 +786,7 @@
       height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       border-radius: 3px;
-      transition: width 0.5s cubic-bezier(.22,1,.36,1);
+      transition: width 0.5s cubic-bezier(.22, 1, .36, 1);
     }
 
     .progress-text {
@@ -608,7 +809,9 @@
       transition: box-shadow 0.2s;
     }
 
-    .question-card:hover { box-shadow: var(--shadow); }
+    .question-card:hover {
+      box-shadow: var(--shadow);
+    }
 
     .question-num {
       font-family: 'Syne', sans-serif;
@@ -628,20 +831,24 @@
       color: var(--text);
     }
 
-    .options { display: flex; flex-direction: column; gap: 0.45rem; }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
 
     .option-btn {
       width: 100%;
       padding: 0.75rem 1rem;
-      background: rgba(255,255,255,0.55);
-      border: 1.5px solid rgba(200,200,230,0.5);
+      background: rgba(255, 255, 255, 0.55);
+      border: 1.5px solid rgba(200, 200, 230, 0.5);
       border-radius: 10px;
       color: var(--text);
       font-family: 'Epilogue', sans-serif;
       font-size: 0.87rem;
       text-align: left;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(.22,1,.36,1);
+      transition: all 0.18s cubic-bezier(.22, 1, .36, 1);
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -649,20 +856,35 @@
 
     .option-btn:hover:not(:disabled) {
       border-color: var(--accent);
-      background: rgba(108,71,255,0.07);
+      background: rgba(108, 71, 255, 0.07);
       transform: translateX(3px);
     }
 
-    .option-btn.correct { border-color: var(--correct); background: rgba(0,196,160,0.1); color: #007a63; }
-    .option-btn.wrong   { border-color: var(--wrong);   background: rgba(255,92,135,0.1); color: #c0284d; }
-    .option-btn:disabled { cursor: default; }
+    .option-btn.correct {
+      border-color: var(--correct);
+      background: rgba(0, 196, 160, 0.1);
+      color: #007a63;
+    }
+
+    .option-btn.wrong {
+      border-color: var(--wrong);
+      background: rgba(255, 92, 135, 0.1);
+      color: #c0284d;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
 
     .option-letter {
-      width: 26px; height: 26px;
+      width: 26px;
+      height: 26px;
       border-radius: 8px;
-      border: 1.5px solid rgba(200,200,230,0.6);
-      background: rgba(255,255,255,0.7);
-      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid rgba(200, 200, 230, 0.6);
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Syne', sans-serif;
       font-size: 0.7rem;
       font-weight: 700;
@@ -671,14 +893,23 @@
       transition: all 0.15s;
     }
 
-    .option-btn.correct .option-letter { background: var(--correct); border-color: var(--correct); color: white; }
-    .option-btn.wrong   .option-letter { background: var(--wrong);   border-color: var(--wrong);   color: white; }
+    .option-btn.correct .option-letter {
+      background: var(--correct);
+      border-color: var(--correct);
+      color: white;
+    }
+
+    .option-btn.wrong .option-letter {
+      background: var(--wrong);
+      border-color: var(--wrong);
+      color: white;
+    }
 
     .explanation {
       display: none;
       margin-top: 1rem;
       padding: 0.8rem 1rem;
-      background: linear-gradient(135deg, rgba(108,71,255,0.06), rgba(0,196,160,0.06));
+      background: linear-gradient(135deg, rgba(108, 71, 255, 0.06), rgba(0, 196, 160, 0.06));
       border-left: 3px solid var(--accent);
       border-radius: 0 10px 10px 0;
       font-size: 0.84rem;
@@ -686,8 +917,15 @@
       color: #4a4a6a;
     }
 
-    .explanation.show { display: block; animation: fadeUp 0.25s ease both; }
-    .explanation strong { color: var(--accent); font-weight: 600; }
+    .explanation.show {
+      display: block;
+      animation: fadeUp 0.25s ease both;
+    }
+
+    .explanation strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
 
     /* SCORE */
     .quiz-score {
@@ -702,22 +940,31 @@
       box-shadow: var(--shadow);
     }
 
-    .quiz-score.show { display: block; animation: fadeUp 0.4s ease both; }
+    .quiz-score.show {
+      display: block;
+      animation: fadeUp 0.4s ease both;
+    }
 
     .score-ring {
-      width: 96px; height: 96px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 1rem;
-      box-shadow: 0 8px 28px rgba(108,71,255,0.35);
+      box-shadow: 0 8px 28px rgba(108, 71, 255, 0.35);
     }
 
     .score-ring-inner {
-      width: 76px; height: 76px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       background: white;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-direction: column;
     }
 
@@ -732,8 +979,17 @@
       line-height: 1;
     }
 
-    .score-den { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
-    .score-label { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .score-den {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
 
     .retry-btn {
       padding: 0.6rem 1.4rem;
@@ -748,7 +1004,10 @@
       transition: all 0.2s;
     }
 
-    .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .retry-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     /* KEY TERMS */
     .terms-grid {
@@ -764,11 +1023,14 @@
       border-radius: var(--radius2);
       padding: 1.1rem 1.3rem;
       box-shadow: var(--shadow2);
-      transition: all 0.2s cubic-bezier(.22,1,.36,1);
+      transition: all 0.2s cubic-bezier(.22, 1, .36, 1);
       animation: fadeUp 0.4s ease both;
     }
 
-    .term-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .term-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
 
     .term-word {
       font-family: 'Syne', sans-serif;
@@ -781,335 +1043,356 @@
       margin-bottom: 0.4rem;
     }
 
-    .term-def { font-size: 0.83rem; color: #5a5a7a; line-height: 1.6; }
+    .term-def {
+      font-size: 0.83rem;
+      color: #5a5a7a;
+      line-height: 1.6;
+    }
 
     @media (max-width: 600px) {
-      .controls { grid-template-columns: 1fr; }
-      .results-header { flex-direction: column; align-items: flex-start; }
-      .terms-grid { grid-template-columns: 1fr; }
-      header h1 { font-size: 2rem; }
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .terms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 
-<div class="wrapper">
+  <div class="wrapper">
 
-  <header>
-    <div class="logo-badge">
-      <div class="logo-icon">✦</div>
-      <span>StudyAI · Hack-A-Sprint 2026</span>
-    </div>
-    <h1>Turn notes into knowledge</h1>
-    <p>Paste any study material and get an instant summary, quiz, and key terms — powered by AI.</p>
-  </header>
-
-  <div class="card">
-    <div class="section-label">Your Study Material</div>
-    <textarea id="studyText" placeholder="Paste your lecture notes, textbook excerpt, or any study content here..."></textarea>
-    <div class="divider-or">or upload a file</div>
-    <div class="upload-zone" id="uploadZone">
-      <div class="upload-icon">📄</div>
-      <p>Drop your <strong>PDF or TXT</strong> file here</p>
-      <p style="font-size:0.75rem;margin-top:0.2rem">or click to browse</p>
-      <div class="file-pill" id="filePill">✓ <span id="fileName"></span></div>
-    </div>
-    <input type="file" id="fileInput" accept=".pdf,.txt" />
-  </div>
-
-  <div class="controls">
-    <div class="control-card">
-      <label>Difficulty Level</label>
-      <div class="diff-options">
-        <button class="diff-btn" data-val="Easy">Easy</button>
-        <button class="diff-btn active" data-val="Medium">Medium</button>
-        <button class="diff-btn" data-val="Hard">Hard</button>
+    <header>
+      <div class="logo-badge">
+        <div class="logo-icon">✦</div>
+        <span> StudyAI </span>
       </div>
+      <h1>Turn notes into knowledge</h1>
+      <p>Paste any study material and get an instant summary, quiz, and key terms — powered by AI.</p>
+    </header>
+
+    <div class="card">
+      <div class="section-label">Your Study Material</div>
+      <textarea id="studyText"
+        placeholder="Paste your lecture notes, textbook excerpt, or any study content here..."></textarea>
+      <div class="divider-or">or upload a file</div>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">📄</div>
+        <p>Drop your <strong>PDF or TXT</strong> file here</p>
+        <p style="font-size:0.75rem;margin-top:0.2rem">or click to browse</p>
+        <div class="file-pill" id="filePill">✓ <span id="fileName"></span></div>
+      </div>
+      <input type="file" id="fileInput" accept=".pdf,.txt" />
     </div>
-    <div class="control-card">
-      <label>
-        <div class="slider-label">
-          <span>Questions</span>
-          <span class="slider-val" id="qCountVal">5</span>
+
+    <div class="controls">
+      <div class="control-card">
+        <label>Difficulty Level</label>
+        <div class="diff-options">
+          <button class="diff-btn" data-val="Easy">Easy</button>
+          <button class="diff-btn active" data-val="Medium">Medium</button>
+          <button class="diff-btn" data-val="Hard">Hard</button>
         </div>
-      </label>
-      <input type="range" id="qCount" min="3" max="10" value="5" />
-    </div>
-  </div>
-
-  <button class="generate-btn" id="generateBtn" onclick="generate()">
-    <div class="btn-inner">✦ Generate Summary & Quiz</div>
-  </button>
-
-  <div class="error-box" id="errorBox"></div>
-
-  <div class="loader" id="loader">
-    <div class="loader-dots"><span></span><span></span><span></span></div>
-    <p>Analysing with <em>AI</em> — just a moment...</p>
-  </div>
-
-  <div id="results">
-    <div class="results-header">
-      <div class="results-title">Your Study Kit ✦</div>
-      <button class="download-btn" onclick="downloadPDF()">⬇ Download PDF</button>
-    </div>
-
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('summary',this)">📋 Summary</button>
-      <button class="tab-btn" onclick="switchTab('quiz',this)">🧠 Quiz</button>
-      <button class="tab-btn" onclick="switchTab('terms',this)">📖 Key Terms</button>
-    </div>
-
-    <div class="tab-panel active" id="tab-summary">
-      <div id="summaryContent"></div>
-    </div>
-
-    <div class="tab-panel" id="tab-quiz">
-      <div class="quiz-progress">
-        <div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:0%"></div></div>
-        <div class="progress-text" id="progressText">0 answered</div>
       </div>
-      <div id="quizContent"></div>
-      <div class="quiz-score" id="quizScore">
-        <div class="score-ring">
-          <div class="score-ring-inner">
-            <div class="score-num" id="scoreNum">0</div>
-            <div class="score-den" id="scoreDen">of 0</div>
+      <div class="control-card">
+        <label>
+          <div class="slider-label">
+            <span>Questions</span>
+            <span class="slider-val" id="qCountVal">5</span>
           </div>
-        </div>
-        <div class="score-label">Quiz complete! Review your answers above.</div>
-        <button class="retry-btn" onclick="retryQuiz()">↺ Retry Quiz</button>
+        </label>
+        <input type="range" id="qCount" min="3" max="10" value="5" />
       </div>
     </div>
 
-    <div class="tab-panel" id="tab-terms">
-      <div class="terms-grid" id="termsContent"></div>
+    <button class="generate-btn" id="generateBtn" onclick="generate()">
+      <div class="btn-inner">✦ Generate Summary & Quiz</div>
+    </button>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="loader" id="loader">
+      <div class="loader-dots"><span></span><span></span><span></span></div>
+      <p>Analysing with <em>AI</em> — just a moment...</p>
     </div>
+
+    <div id="results">
+      <div class="results-header">
+        <div class="results-title">Your Study Kit ✦</div>
+        <button class="download-btn" onclick="downloadPDF()">⬇ Download PDF</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('summary',this)">📋 Summary</button>
+        <button class="tab-btn" onclick="switchTab('quiz',this)">🧠 Quiz</button>
+        <button class="tab-btn" onclick="switchTab('terms',this)">📖 Key Terms</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-summary">
+        <div id="summaryContent"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-quiz">
+        <div class="quiz-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="quizProgress" style="width:0%"></div>
+          </div>
+          <div class="progress-text" id="progressText">0 answered</div>
+        </div>
+        <div id="quizContent"></div>
+        <div class="quiz-score" id="quizScore">
+          <div class="score-ring">
+            <div class="score-ring-inner">
+              <div class="score-num" id="scoreNum">0</div>
+              <div class="score-den" id="scoreDen">of 0</div>
+            </div>
+          </div>
+          <div class="score-label">Quiz complete! Review your answers above.</div>
+          <button class="retry-btn" onclick="retryQuiz()">↺ Retry Quiz</button>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-terms">
+        <div class="terms-grid" id="termsContent"></div>
+      </div>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:5000'
+      : 'https://YOUR-RENDER-URL.onrender.com';
 
-<script>
-  const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:5000'
-    : 'https://YOUR-RENDER-URL.onrender.com';
+    let currentData = null, selectedFile = null;
+    let quizAnswered = 0, quizCorrect = 0, quizTotal = 0;
 
-  let currentData = null, selectedFile = null;
-  let quizAnswered = 0, quizCorrect = 0, quizTotal = 0;
+    // FILE UPLOAD
+    const uploadZone = document.getElementById('uploadZone');
+    const fileInput = document.getElementById('fileInput');
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
+    fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
 
-  // FILE UPLOAD
-  const uploadZone = document.getElementById('uploadZone');
-  const fileInput  = document.getElementById('fileInput');
-  uploadZone.addEventListener('click', () => fileInput.click());
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); handleFile(e.dataTransfer.files[0]); });
-  fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
-
-  function handleFile(file) {
-    if (!file) return;
-    selectedFile = file;
-    document.getElementById('fileName').textContent = file.name;
-    document.getElementById('filePill').classList.add('show');
-    document.getElementById('studyText').value = '';
-  }
-
-  // DIFFICULTY
-  document.querySelectorAll('.diff-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
-
-  // SLIDER
-  const qCount = document.getElementById('qCount');
-  const qCountVal = document.getElementById('qCountVal');
-  function updateSlider() {
-    const pct = ((qCount.value - 3) / 7) * 100;
-    qCount.style.setProperty('--pct', pct + '%');
-    qCountVal.textContent = qCount.value;
-  }
-  qCount.addEventListener('input', updateSlider);
-  updateSlider();
-
-  // GENERATE
-  async function generate() {
-    const text = document.getElementById('studyText').value.trim();
-    const difficulty = document.querySelector('.diff-btn.active').dataset.val;
-    const numQ = parseInt(qCount.value);
-
-    if (!text && !selectedFile) { showError('Please paste some text or upload a file first.'); return; }
-
-    setLoading(true);
-    hideError();
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('results').classList.remove('active');
-
-    try {
-      const fd = new FormData();
-      if (selectedFile) fd.append('file', selectedFile);
-      else fd.append('text', text);
-      fd.append('difficulty', difficulty);
-      fd.append('num_questions', numQ);
-
-      const res  = await fetch(`${API_BASE}/api/generate`, { method: 'POST', body: fd });
-      const json = await res.json();
-
-      if (!json.success) { showError(json.error || 'Something went wrong. Please try again.'); return; }
-
-      currentData = json.data;
-      renderResults(json.data);
-    } catch (err) {
-      showError('Cannot connect to the server. Make sure the backend is running on port 5000.');
-    } finally {
-      setLoading(false);
+    function handleFile(file) {
+      if (!file) return;
+      selectedFile = file;
+      document.getElementById('fileName').textContent = file.name;
+      document.getElementById('filePill').classList.add('show');
+      document.getElementById('studyText').value = '';
     }
-  }
 
-  function renderResults(data) {
-    renderSummary(data.summary);
-    renderQuiz(data.quiz);
-    renderTerms(data.key_terms);
-    const r = document.getElementById('results');
-    r.style.display = 'block';
-    r.classList.add('active');
-    setTimeout(() => r.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  }
+    // DIFFICULTY
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
 
-  function renderSummary(summary) {
-    document.getElementById('summaryContent').innerHTML = summary.map((t, i) => `
-      <div class="topic-card" style="animation-delay:${i*0.07}s">
+    // SLIDER
+    const qCount = document.getElementById('qCount');
+    const qCountVal = document.getElementById('qCountVal');
+    function updateSlider() {
+      const pct = ((qCount.value - 3) / 7) * 100;
+      qCount.style.setProperty('--pct', pct + '%');
+      qCountVal.textContent = qCount.value;
+    }
+    qCount.addEventListener('input', updateSlider);
+    updateSlider();
+
+    // GENERATE
+    async function generate() {
+      const text = document.getElementById('studyText').value.trim();
+      const difficulty = document.querySelector('.diff-btn.active').dataset.val;
+      const numQ = parseInt(qCount.value);
+
+      if (!text && !selectedFile) { showError('Please paste some text or upload a file first.'); return; }
+
+      setLoading(true);
+      hideError();
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('results').classList.remove('active');
+
+      try {
+        const fd = new FormData();
+        if (selectedFile) fd.append('file', selectedFile);
+        else fd.append('text', text);
+        fd.append('difficulty', difficulty);
+        fd.append('num_questions', numQ);
+
+        const res = await fetch(`${API_BASE}/api/generate`, { method: 'POST', body: fd });
+        const json = await res.json();
+
+        if (!json.success) { showError(json.error || 'Something went wrong. Please try again.'); return; }
+
+        currentData = json.data;
+        renderResults(json.data);
+      } catch (err) {
+        showError('Cannot connect to the server. Make sure the backend is running on port 5000.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function renderResults(data) {
+      renderSummary(data.summary);
+      renderQuiz(data.quiz);
+      renderTerms(data.key_terms);
+      const r = document.getElementById('results');
+      r.style.display = 'block';
+      r.classList.add('active');
+      setTimeout(() => r.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+
+    function renderSummary(summary) {
+      document.getElementById('summaryContent').innerHTML = summary.map((t, i) => `
+      <div class="topic-card" style="animation-delay:${i * 0.07}s">
         <div class="topic-title">${t.topic}</div>
         <ul class="topic-points">${t.points.map(p => `<li>${p}</li>`).join('')}</ul>
       </div>`).join('');
-  }
+    }
 
-  function renderQuiz(quiz) {
-    quizAnswered = 0; quizCorrect = 0; quizTotal = quiz.length;
-    updateProgress();
-    document.getElementById('quizScore').classList.remove('show');
-    document.getElementById('quizContent').innerHTML = quiz.map((q, i) => `
-      <div class="question-card" id="qcard-${i}" style="animation-delay:${i*0.06}s">
-        <div class="question-num">Question ${i+1} of ${quiz.length}</div>
+    function renderQuiz(quiz) {
+      quizAnswered = 0; quizCorrect = 0; quizTotal = quiz.length;
+      updateProgress();
+      document.getElementById('quizScore').classList.remove('show');
+      document.getElementById('quizContent').innerHTML = quiz.map((q, i) => `
+      <div class="question-card" id="qcard-${i}" style="animation-delay:${i * 0.06}s">
+        <div class="question-num">Question ${i + 1} of ${quiz.length}</div>
         <div class="question-text">${q.question}</div>
         <div class="options">
           ${q.options.map((opt, oi) => {
-            const l = ['A','B','C','D'][oi];
-            return `<button class="option-btn" id="opt-${i}-${l}" onclick="selectAnswer(${i},'${l}','${q.correct}',this)">
+        const l = ['A', 'B', 'C', 'D'][oi];
+        return `<button class="option-btn" id="opt-${i}-${l}" onclick="selectAnswer(${i},'${l}','${q.correct}',this)">
               <span class="option-letter">${l}</span>${opt}
             </button>`;
-          }).join('')}
+      }).join('')}
         </div>
         <div class="explanation" id="exp-${i}"><strong>💡 Explanation:</strong> ${q.explanation}</div>
       </div>`).join('');
-  }
-
-  function selectAnswer(qIdx, chosen, correct, btn) {
-    const card = document.getElementById(`qcard-${qIdx}`);
-    if (card.dataset.answered) return;
-    card.dataset.answered = 'true';
-    quizAnswered++;
-    if (chosen === correct) quizCorrect++;
-    card.querySelectorAll('.option-btn').forEach(b => {
-      b.disabled = true;
-      const l = b.querySelector('.option-letter').textContent;
-      if (l === correct) b.classList.add('correct');
-      else if (b === btn && chosen !== correct) b.classList.add('wrong');
-    });
-    document.getElementById(`exp-${qIdx}`).classList.add('show');
-    updateProgress();
-    if (quizAnswered === quizTotal) {
-      setTimeout(() => {
-        document.getElementById('scoreNum').textContent = quizCorrect;
-        document.getElementById('scoreDen').textContent = `of ${quizTotal}`;
-        document.getElementById('quizScore').classList.add('show');
-      }, 400);
     }
-  }
 
-  function retryQuiz() { if (currentData) renderQuiz(currentData.quiz); }
+    function selectAnswer(qIdx, chosen, correct, btn) {
+      const card = document.getElementById(`qcard-${qIdx}`);
+      if (card.dataset.answered) return;
+      card.dataset.answered = 'true';
+      quizAnswered++;
+      if (chosen === correct) quizCorrect++;
+      card.querySelectorAll('.option-btn').forEach(b => {
+        b.disabled = true;
+        const l = b.querySelector('.option-letter').textContent;
+        if (l === correct) b.classList.add('correct');
+        else if (b === btn && chosen !== correct) b.classList.add('wrong');
+      });
+      document.getElementById(`exp-${qIdx}`).classList.add('show');
+      updateProgress();
+      if (quizAnswered === quizTotal) {
+        setTimeout(() => {
+          document.getElementById('scoreNum').textContent = quizCorrect;
+          document.getElementById('scoreDen').textContent = `of ${quizTotal}`;
+          document.getElementById('quizScore').classList.add('show');
+        }, 400);
+      }
+    }
 
-  function updateProgress() {
-    const pct = quizTotal ? (quizAnswered / quizTotal) * 100 : 0;
-    document.getElementById('quizProgress').style.width = pct + '%';
-    document.getElementById('progressText').textContent = `${quizAnswered} of ${quizTotal} answered`;
-  }
+    function retryQuiz() { if (currentData) renderQuiz(currentData.quiz); }
 
-  function renderTerms(terms) {
-    document.getElementById('termsContent').innerHTML = terms.map((t, i) => `
-      <div class="term-card" style="animation-delay:${i*0.05}s">
+    function updateProgress() {
+      const pct = quizTotal ? (quizAnswered / quizTotal) * 100 : 0;
+      document.getElementById('quizProgress').style.width = pct + '%';
+      document.getElementById('progressText').textContent = `${quizAnswered} of ${quizTotal} answered`;
+    }
+
+    function renderTerms(terms) {
+      document.getElementById('termsContent').innerHTML = terms.map((t, i) => `
+      <div class="term-card" style="animation-delay:${i * 0.05}s">
         <div class="term-word">${t.term}</div>
         <div class="term-def">${t.definition}</div>
       </div>`).join('');
-  }
-
-  function switchTab(name, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(`tab-${name}`).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  function downloadPDF() {
-    if (!currentData) return;
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-    const margin = 18, maxW = 174, pageH = 297;
-    let y = margin;
-
-    function check(h=10) { if (y+h > pageH-15) { doc.addPage(); y = margin; } }
-    function write(text, size, bold, color, indent=0) {
-      doc.setFontSize(size); doc.setFont('helvetica', bold ? 'bold' : 'normal');
-      doc.setTextColor(...color);
-      doc.splitTextToSize(text, maxW-indent).forEach(line => { check(size*0.5); doc.text(line, margin+indent, y); y += size*0.45; });
     }
 
-    doc.setFillColor(108,71,255); doc.rect(0,0,210,22,'F');
-    doc.setFontSize(14); doc.setFont('helvetica','bold'); doc.setTextColor(255,255,255);
-    doc.text('StudyAI — Study Kit', margin, 14);
-    doc.setFontSize(9); doc.setFont('helvetica','normal');
-    doc.text(new Date().toLocaleDateString(), 210-margin, 14, { align:'right' });
-    y = 32;
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`tab-${name}`).classList.add('active');
+      btn.classList.add('active');
+    }
 
-    write('SUMMARY', 13, true, [108,71,255]); y += 3;
-    currentData.summary.forEach(t => {
-      check(12); write(t.topic, 11, true, [26,26,46]);
-      t.points.forEach(p => { check(8); write(`→  ${p}`, 9, false, [74,74,106], 3); }); y += 2;
-    });
+    function downloadPDF() {
+      if (!currentData) return;
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+      const margin = 18, maxW = 174, pageH = 297;
+      let y = margin;
 
-    y += 4; write('QUIZ', 13, true, [255,92,135]); y += 3;
-    currentData.quiz.forEach((q,i) => {
-      check(14); write(`Q${i+1}. ${q.question}`, 10, true, [26,26,46]);
-      q.options.forEach(opt => { write(opt, 9, false, opt.startsWith(q.correct+'.') ? [0,150,120] : [100,100,130], 4); });
-      write(`Explanation: ${q.explanation}`, 8, false, [130,130,160], 4); y += 3;
-    });
+      function check(h = 10) { if (y + h > pageH - 15) { doc.addPage(); y = margin; } }
+      function write(text, size, bold, color, indent = 0) {
+        doc.setFontSize(size); doc.setFont('helvetica', bold ? 'bold' : 'normal');
+        doc.setTextColor(...color);
+        doc.splitTextToSize(text, maxW - indent).forEach(line => { check(size * 0.5); doc.text(line, margin + indent, y); y += size * 0.45; });
+      }
 
-    y += 4; write('KEY TERMS', 13, true, [0,196,160]); y += 3;
-    currentData.key_terms.forEach(t => {
-      check(10); write(t.term, 10, true, [108,71,255]);
-      write(t.definition, 9, false, [100,100,130], 3); y += 2;
-    });
+      doc.setFillColor(108, 71, 255); doc.rect(0, 0, 210, 22, 'F');
+      doc.setFontSize(14); doc.setFont('helvetica', 'bold'); doc.setTextColor(255, 255, 255);
+      doc.text('StudyAI — Study Kit', margin, 14);
+      doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+      doc.text(new Date().toLocaleDateString(), 210 - margin, 14, { align: 'right' });
+      y = 32;
 
-    doc.save('studyai-kit.pdf');
-  }
+      write('SUMMARY', 13, true, [108, 71, 255]); y += 3;
+      currentData.summary.forEach(t => {
+        check(12); write(t.topic, 11, true, [26, 26, 46]);
+        t.points.forEach(p => { check(8); write(`→  ${p}`, 9, false, [74, 74, 106], 3); }); y += 2;
+      });
 
-  function setLoading(val) {
-    document.getElementById('loader').classList.toggle('active', val);
-    document.getElementById('generateBtn').disabled = val;
-  }
+      y += 4; write('QUIZ', 13, true, [255, 92, 135]); y += 3;
+      currentData.quiz.forEach((q, i) => {
+        check(14); write(`Q${i + 1}. ${q.question}`, 10, true, [26, 26, 46]);
+        q.options.forEach(opt => { write(opt, 9, false, opt.startsWith(q.correct + '.') ? [0, 150, 120] : [100, 100, 130], 4); });
+        write(`Explanation: ${q.explanation}`, 8, false, [130, 130, 160], 4); y += 3;
+      });
 
-  function showError(msg) {
-    const el = document.getElementById('errorBox');
-    el.textContent = '⚠ ' + msg;
-    el.classList.add('active');
-  }
+      y += 4; write('KEY TERMS', 13, true, [0, 196, 160]); y += 3;
+      currentData.key_terms.forEach(t => {
+        check(10); write(t.term, 10, true, [108, 71, 255]);
+        write(t.definition, 9, false, [100, 100, 130], 3); y += 2;
+      });
 
-  function hideError() { document.getElementById('errorBox').classList.remove('active'); }
-</script>
+      doc.save('studyai-kit.pdf');
+    }
+
+    function setLoading(val) {
+      document.getElementById('loader').classList.toggle('active', val);
+      document.getElementById('generateBtn').disabled = val;
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorBox');
+      el.textContent = '⚠ ' + msg;
+      el.classList.add('active');
+    }
+
+    function hideError() { document.getElementById('errorBox').classList.remove('active'); }
+  </script>
 </body>
+
 </html>
