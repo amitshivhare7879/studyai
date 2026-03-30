@@ -61,7 +61,7 @@ cd backend
 # Install all Python dependencies
 pip install -r requirements.txt
 
-# Create your environment file
+# Create your environment file in the backend folder
 cp .env.example .env
 # Open .env in any text editor and paste your Groq API key
 # GROQ_API_KEY=gsk_your_key_here
