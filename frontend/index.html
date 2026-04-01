@@ -11,22 +11,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     :root {
-      --bg: #f0f0f7;
-      --glass: rgba(255, 255, 255, 0.65);
-      --glass2: rgba(255, 255, 255, 0.85);
-      --border: rgba(255, 255, 255, 0.9);
-      --border2: rgba(200, 200, 230, 0.4);
-      --shadow: 0 8px 32px rgba(80, 60, 180, 0.10);
-      --shadow2: 0 2px 12px rgba(80, 60, 180, 0.07);
-      --accent: #6c47ff;
-      --accent2: #ff5c87;
-      --accent3: #00c4a0;
-      --text: #1a1a2e;
-      --muted: #7a7a9a;
-      --correct: #00c4a0;
-      --wrong: #ff5c87;
-      --radius: 20px;
-      --radius2: 14px;
+      --bg: #ffffff;
+      --card-bg: #fafafa;
+      --glass: rgba(255, 255, 255, 0.9);
+      --glass2: #ffffff;
+      --border: #e4e4e7;
+      --border2: #f4f4f5;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow2: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 10px -5px rgba(0, 0, 0, 0.02);
+      --accent: #09090b; /* Midnight Black */
+      --accent-glow: rgba(0, 0, 0, 0.03);
+      --accent2: #dc2626; /* Crimson Red */
+      --accent3: #52525b; /* Zinc Gray */
+      --text: #09090b;
+      --muted: #71717a;
+      --correct: #16a34a;
+      --wrong: #dc2626;
+      --radius: 12px;
+      --radius2: 8px;
     }
 
     * {
@@ -44,56 +46,31 @@
       position: relative;
     }
 
-    /* AURORA BACKGROUND ORBS */
-    .orb {
+    /* MODERN MINIMALIST BACKGROUND */
+    body::before {
+      content: '';
       position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.55;
-      pointer-events: none;
-      z-index: 0;
-      animation: drift 18s ease-in-out infinite alternate;
+      inset: 0;
+      background: #ffffff;
+      background-image: 
+        linear-gradient(to right, #f4f4f5 1px, transparent 1px),
+        linear-gradient(to bottom, #f4f4f5 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.5;
+      z-index: -1;
     }
 
-    .orb1 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #c4b5fd, #8b5cf6);
-      top: -120px;
-      left: -100px;
-      animation-delay: 0s;
-    }
-
-    .orb2 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #fda4af, #fb7185);
-      top: 30%;
-      right: -100px;
-      animation-delay: -6s;
-    }
-
-    .orb3 {
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, #6ee7b7, #34d399);
-      bottom: -80px;
-      left: 30%;
-      animation-delay: -12s;
-    }
+    .orb { display: none; }
 
     @keyframes drift {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -20px) scale(1.05); }
+      100% { transform: translate(-20px, 30px) scale(0.97); }
+    }
 
-      50% {
-        transform: translate(30px, -20px) scale(1.05);
-      }
-
-      100% {
-        transform: translate(-20px, 30px) scale(0.97);
-      }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
     }
 
     .wrapper {
@@ -137,15 +114,17 @@
     }
 
     .logo-icon {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 50%;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      box-shadow: 0 2px 8px rgba(108, 71, 255, 0.4);
+      font-size: 16px;
+      color: white;
+      box-shadow: 0 0 20px var(--accent-glow);
+      transform: rotate(10deg);
     }
 
     .logo-badge span {
@@ -177,17 +156,15 @@
       line-height: 1.7;
     }
 
-    /* GLASS CARD */
+    /* MINIMALIST CARD */
     .card {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 1.8rem;
-      margin-bottom: 1.2rem;
-      animation: fadeUp 0.5s cubic-bezier(.22, 1, .36, 1) both;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.5s ease both;
     }
 
     @keyframes fadeUp {
@@ -232,23 +209,24 @@
 
     textarea {
       width: 100%;
-      min-height: 160px;
-      background: rgba(255, 255, 255, 0.6);
-      border: 1.5px solid var(--border2);
+      min-height: 180px;
+      background: #fcfcfc;
+      border: 1.5px solid var(--border);
       border-radius: var(--radius2);
       color: var(--text);
       font-family: 'Epilogue', sans-serif;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      padding: 1rem 1.2rem;
+      font-size: 1rem;
+      line-height: 1.8;
+      padding: 1.5rem;
       resize: vertical;
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: all 0.3s ease;
     }
 
     textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.12);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px var(--accent-glow);
     }
 
     textarea::placeholder {
@@ -426,6 +404,7 @@
     input[type="range"] {
       width: 100%;
       -webkit-appearance: none;
+      appearance: none;
       height: 4px;
       border-radius: 2px;
       background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--pct, 28.5%), rgba(200, 200, 230, 0.4) var(--pct, 28.5%));
@@ -449,26 +428,34 @@
       transform: scale(1.2);
     }
 
-    /* GENERATE BUTTON */
     .generate-btn {
       width: 100%;
-      padding: 1.05rem;
-      background: linear-gradient(135deg, var(--accent), #9b7bff, var(--accent2));
-      background-size: 200% 200%;
-      animation: gradShift 4s ease infinite;
-      color: white;
+      padding: 1.3rem;
+      background: var(--accent);
+      color: #ffffff;
       border: none;
       border-radius: var(--radius);
       font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.1rem;
+      font-weight: 800;
       cursor: pointer;
-      letter-spacing: 0.03em;
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-      box-shadow: 0 6px 24px rgba(108, 71, 255, 0.4);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px -5px rgba(28, 25, 23, 0.3);
       position: relative;
       overflow: hidden;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
+    .generate-btn:hover {
+      background: #44403c;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -8px rgba(28, 25, 23, 0.4);
     }
 
     @keyframes gradShift {
@@ -688,9 +675,10 @@
     }
 
     .tab-btn.active {
-      background: white;
-      color: var(--accent);
-      box-shadow: 0 2px 10px rgba(108, 71, 255, 0.15);
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px -6px var(--accent-glow);
     }
 
     .tab-panel {
@@ -702,52 +690,82 @@
       animation: fadeUp 0.3s ease both;
     }
 
-    /* SUMMARY */
+    /* FLOATING SUMMARY CARDS */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
     .topic-card {
-      background: var(--glass2);
-      backdrop-filter: blur(10px);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: var(--radius2);
-      padding: 1.3rem 1.5rem;
-      margin-bottom: 0.9rem;
-      box-shadow: var(--shadow2);
-      transition: transform 0.2s, box-shadow 0.2s;
-      animation: fadeUp 0.4s ease both;
-      border-left: 3px solid var(--accent);
+      padding: 1.8rem;
+      box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: fadeUp 0.6s cubic-bezier(.22, 1, .36, 1) both;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+      opacity: 0.8;
     }
 
     .topic-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.15);
+      border-color: var(--accent);
     }
 
-    .topic-card:nth-child(2n) {
-      border-left-color: var(--accent2);
+    /* Floating effect for cards - staggered */
+    .topic-card.floating {
+      animation: float 6s ease-in-out infinite;
     }
 
-    .topic-card:nth-child(3n) {
-      border-left-color: var(--accent3);
-    }
+    .topic-card:nth-child(2).floating { animation-delay: 0.5s; }
+    .topic-card:nth-child(3).floating { animation-delay: 1s; }
 
     .topic-title {
       font-family: 'Syne', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
+      font-size: 1.15rem;
+      font-weight: 800;
       color: var(--text);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .topic-title::after {
+      content: '✦';
+      font-size: 0.8rem;
+      color: var(--accent);
     }
 
     .topic-points {
       list-style: none;
+      padding: 0;
     }
 
     .topic-points li {
-      padding: 0.3rem 0 0.3rem 1.3rem;
+      padding: 0.6rem 0 0.6rem 1.5rem;
       position: relative;
-      font-size: 0.87rem;
-      line-height: 1.65;
-      color: #4a4a6a;
-      border-bottom: 1px solid rgba(200, 200, 230, 0.25);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border2);
     }
 
     .topic-points li:last-child {
@@ -755,14 +773,12 @@
     }
 
     .topic-points li::before {
-      content: '';
+      content: '→';
       position: absolute;
       left: 0;
-      top: 0.65rem;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--accent2);
+      font-weight: 800;
+      font-size: 0.85rem;
     }
 
     /* QUIZ */
@@ -786,7 +802,7 @@
       height: 100%;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       border-radius: 3px;
-      transition: width 0.5s cubic-bezier(.22, 1, .36, 1);
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .progress-text {
@@ -848,10 +864,12 @@
       font-size: 0.87rem;
       text-align: left;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(.22, 1, .36, 1);
+      transition: all 0.2s cubic-bezier(.22, 1, .36, 1);
       display: flex;
       align-items: center;
       gap: 0.8rem;
+      position: relative;
+      overflow: hidden;
     }
 
     .option-btn:hover:not(:disabled) {
@@ -1034,13 +1052,13 @@
 
     .term-word {
       font-family: 'Syne', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.6rem;
     }
 
     .term-def {
@@ -1145,7 +1163,7 @@
       </div>
 
       <div class="tab-panel active" id="tab-summary">
-        <div id="summaryContent"></div>
+        <div id="summaryContent" class="summary-grid"></div>
       </div>
 
       <div class="tab-panel" id="tab-quiz">
@@ -1265,7 +1283,7 @@
 
     function renderSummary(summary) {
       document.getElementById('summaryContent').innerHTML = summary.map((t, i) => `
-      <div class="topic-card" style="animation-delay:${i * 0.07}s">
+      <div class="topic-card floating" style="animation-delay:${i * 0.15}s">
         <div class="topic-title">${t.topic}</div>
         <ul class="topic-points">${t.points.map(p => `<li>${p}</li>`).join('')}</ul>
       </div>`).join('');
