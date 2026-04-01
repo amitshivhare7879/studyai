@@ -1,5 +1,7 @@
 # StudyAI — AI-Powered Study Notes Summariser & Quiz Generator
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://studyai-pi-ruby.vercel.app)
+
 ## What is StudyAI?
 
 StudyAI is a web application that takes any study material — lecture notes, textbook chapters, or any text — and instantly generates:
@@ -15,17 +17,14 @@ StudyAI is a web application that takes any study material — lecture notes, te
 
 ## Screenshots
 
+### Landing Page
+![StudyAI Landing Page](screenshots/landing.png)
+
 ### Summary Output
-> *(paste your summary screenshot here after running the app)*
-> Filename: `screenshots/summary.png`
+![StudyAI Summary Output](screenshots/summary.png)
 
 ### Quiz Output
-> *(paste your quiz screenshot here — show a correct/wrong answer highlighted)*
-> Filename: `screenshots/quiz.png`
-
-### PDF Download
-> *(paste your PDF download screenshot here)*
-> Filename: `screenshots/pdf.png`
+![StudyAI Quiz Output](screenshots/quiz.png)
 
 ---
 
@@ -50,9 +49,9 @@ studyai/
 │   ├── sample_medium.txt    # French Revolution (~500 words) — full feature demo
 │   └── sample_long.txt      # Computer Networks (~900 words) — stress test
 ├── screenshots/
-│   ├── summary.png          # Screenshot of summary output
-│   ├── quiz.png             # Screenshot of quiz with answer highlighted
-│   └── pdf.png              # Screenshot of PDF download
+│   ├── landing.png          # Screenshot of landing/input page
+│   ├── summary.png          # Screenshot of summary/results output
+│   └── quiz.png             # Screenshot of quiz with answer highlighted
 └── README.md                # This file
 ```
 
